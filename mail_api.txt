@@ -1,0 +1,16 @@
+
+	@PostMapping("/otp/{mobile}")
+	public ResponseEntity<?> otp(@PathVariable("mobile") String mobile)
+	{
+		SimpleMailMessage message = new SimpleMailMessage();
+		Random rand = new Random();
+		 val = rand.nextInt(9000) + 1000;
+		message.setFrom("axisbank.dummy.info@gmail.com");
+		  message.setTo(repository.findByMobileNumber(mobile).getEmail()); String
+		  msg="Dear Customer OTP "+val;
+		  message.setText(msg);
+		  message.setSubject("OTP message."
+		  ); 
+		  mailSender.send(message);
+		  return new ResponseEntity<Integer>(val,HttpStatus.OK);
+	}
